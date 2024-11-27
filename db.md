@@ -1,3 +1,11 @@
+
+# Tạo Cơ Sở Dữ Liệu QLSV
+
+## 1. Tạo cơ sở dữ liệu và bảng
+
+Đầu tiên, chúng ta tạo cơ sở dữ liệu `QLSV` và các bảng `khoavien` và `sinhvien` như sau:
+
+```sql
 -- Tạo cơ sở dữ liệu QLSV
 CREATE DATABASE IF NOT EXISTS QLSV;
 
@@ -6,22 +14,28 @@ USE QLSV;
 
 -- Tạo bảng khoavien
 CREATE TABLE IF NOT EXISTS khoavien (
-MaKhoaVien INT AUTO_INCREMENT PRIMARY KEY,
-TenKhoaVien VARCHAR(30),
-Phone VARCHAR(10),
-Email VARCHAR(30)
+    MaKhoaVien INT AUTO_INCREMENT PRIMARY KEY,
+    TenKhoaVien VARCHAR(30),
+    Phone VARCHAR(10),
+    Email VARCHAR(30)
 );
 
 -- Tạo bảng sinhvien
 CREATE TABLE IF NOT EXISTS sinhvien (
-MaSv INT AUTO_INCREMENT PRIMARY KEY,
-MaKhoaVien INT,
-Lop VARCHAR(10),
-HoTen VARCHAR(30),
-NgaySinh VARCHAR(30),
-FOREIGN KEY (MaKhoaVien) REFERENCES khoavien(MaKhoaVien)
+    MaSv INT AUTO_INCREMENT PRIMARY KEY,
+    MaKhoaVien INT,
+    Lop VARCHAR(10),
+    HoTen VARCHAR(30),
+    NgaySinh VARCHAR(30),
+    FOREIGN KEY (MaKhoaVien) REFERENCES khoavien(MaKhoaVien)
 );
+```
 
+## 2. Thêm dữ liệu mẫu vào bảng
+
+Sau khi tạo cơ sở dữ liệu và bảng, bạn có thể thêm dữ liệu mẫu cho các khoa và sinh viên như sau:
+
+```sql
 -- Thêm dữ liệu vào bảng khoavien
 INSERT INTO khoavien (TenKhoaVien, Phone, Email) VALUES
 ('CNTT', '0123456789', 'cntt@university.edu'),
@@ -42,3 +56,10 @@ INSERT INTO sinhvien (MaKhoaVien, Lop, HoTen, NgaySinh) VALUES
 (4, 'KT1', 'Lý Văn H', '2001-08-08'),
 (4, 'KT2', 'Đặng Thị I', '2001-09-09'),
 (5, 'NN1', 'Bùi Minh K', '2001-10-10');
+```
+
+## Giải thích
+
+- **Cơ sở dữ liệu `QLSV`** chứa hai bảng: `khoavien` và `sinhvien`.
+- **Bảng `khoavien`** lưu trữ thông tin về các khoa viện như CNTT, Sư phạm Toán, Luật, Kinh tế, Ngoại ngữ.
+- **Bảng `sinhvien`** lưu trữ thông tin về sinh viên thuộc các khoa viện với các trường như `MaSv`, `MaKhoaVien` (khóa ngoại), `Lop`, `HoTen`, và `NgaySinh`.
