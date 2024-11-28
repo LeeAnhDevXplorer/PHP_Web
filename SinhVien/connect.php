@@ -1,4 +1,4 @@
-
+ 
 
 <?php
 $servername = "localhost:3309";  // Tên máy chủ, mặc định là localhost
